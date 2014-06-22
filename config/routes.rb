@@ -1,6 +1,9 @@
 PraticeMaps::Application.routes.draw do
+  resources :users
+
+
   resources :maps
-  root :to => 'maps#index'
+  root :to => 'users#index'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
