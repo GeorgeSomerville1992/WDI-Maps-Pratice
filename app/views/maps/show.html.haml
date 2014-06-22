@@ -1,0 +1,12 @@
+%p#notice= notice
+
+%p
+  %b Title:
+  = @map.title
+%p
+  %b Body:
+  = @map.body
+
+= link_to 'Edit', edit_map_path(@map)
+\|
+= link_to 'Back', maps_path
