@@ -8,15 +8,22 @@ class UsersController < ApplicationController
       format.html # index.html.erb
       format.json { render json: @users }
         @hash = Gmaps4rails.build_markers(@users) do |user, marker|
-      marker.lat user.latitude
-      marker.lng user.longitude
-      marker.json({:id => user.id })
-      marker.picture({
-       "url" => "/logo.png",
-       "width" =>  32,
-       "height" => 32})
-      marker.infowindow render_to_string(:partial => "/users/my_template", :locals => { :object => user})
-    end
+        marker.lat user.latitude
+        marker.lng user.longitude
+        marker.infowindow user.description
+        marker.json({name: user.id})
+        #marker.pciture does not exist in daattabbsee yet!!!!
+        # marker.picture({
+        #   "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+        #   "width":  36,
+        #   "height": 36})
+       
+      # marker.picture({
+      #  "url" => "/logo.png",
+      #  "width" =>  32,
+      #  "height" => 32})
+      # marker.infowindow render_to_string(:partial => "/users/my_template", :locals => { :object => user})
+      end
     end
   end
 

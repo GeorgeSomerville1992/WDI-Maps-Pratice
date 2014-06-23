@@ -14,13 +14,41 @@
       %td= user.name
       %td= user.email
       %td= user.description
-      %td = user.longitude
-      %td = user.latitude
-      %td = user.address
+      %td= user.longitude
+      %td= user.latitude
+      %td= user.address
       %td= link_to 'Show', user
       %td= link_to 'Edit', edit_user_path(user)
       %td= link_to 'Destroy', user, :method => :delete, :data => { :confirm => 'Are you sure?' }
-
+%h1 map
+%div{style: "width: 800px;"}
+  #map{style: "width: 800px; height: 400px;"}
 %br
+:javascript
+buildMap(#{raw @hash.to_json});
+  handler = Gmaps.build('Google');
+  handler.buildMap({ provider: {}, 
+    internal: {id: 'map'}},
+    // other google map API options
+    
+  
+    function(){
+      markers = handler.addMarkers([
+        {
+          "lat": 51.506178, 
+          "lng": -0.088369,
+          "picture": {
+            "url": "https://addons.cdn.mozilla.net/img/uploads/addon_icons/13/13028-64.png",
+            "width":  36,
+            "height": 36
+          },
+          "infowindow": "hello!"
+        }
+      ]);
+      markers = handler.addMarkers(#{raw @hash.to_json});
+      handler.bounds.extendWith(markers);
+      handler.fitMapToBounds();
+      });
+
 
 = link_to 'New User', new_user_path
